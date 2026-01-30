@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Simple Calculator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin-top: 50px;
+        }
+
+        input {
+            padding: 5px;
+            width: 150px;
+            margin: 5px;
+        }
+
+        button {
+            padding: 7px 15px;
+            font-size: 16px;
+            margin: 5px;
+        }
+
+        #result {
+            font-weight: bold;
+            margin-top: 20px;
+            color: green;
+        }
+
+        #error {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <h1>Simple Arithmetic Calculator</h1>
+
+    <!-- Input fields -->
+    <input type="number" id="num1" placeholder="Enter first number">
+    <input type="number" id="num2" placeholder="Enter second number">
+    <br>
+
+    <!-- Buttons for operations -->
+    <button onclick="calculate('+')">Add (+)</button>
+    <button onclick="calculate('-')">Subtract (-)</button>
+    <button onclick="calculate('*')">Multiply (×)</button>
+    <button onclick="calculate('/')">Divide (÷)</button>
+
+    <!-- Result display -->
+    <p id="result"></p>
+    <p id="error"></p>
+
+    <script>
+        function calculate(operator) {
+            // Clear previous messages
+            document.getElementById("result").innerText = "";
+            document.getElementById("error").innerText = "";
+
+            // Get input values
+            let n1 = parseFloat(document.getElementById("num1").value);
+            let n2 = parseFloat(document.getElementById("num2").value);
+
+            // Validate inputs
+            if (isNaN(n1) || isNaN(n2)) {
+                document.getElementById("error").innerText = "Please enter valid numbers!";
+                return;
+            }
+
+            // Calculate result
+            let result;
+            switch(operator) {
+                case '+':
+                    result = n1 + n2;
+                    break;
+                case '-':
+                    result = n1 - n2;
+                    break;
+                case '*':
+                    result = n1 * n2;
+                    break;
+                case '/':
+                    if (n2 === 0) {
+                        document.getElementById("error").innerText = "Division by zero is not allowed!";
+                        return;
+                    }
+                    result = n1 / n2;
+                    break;
+                default:
+                    document.getElementById("error").innerText = "Invalid operation!";
+                    return;
+            }
+
+            // Display result
+            document.getElementById("result").innerText = "Result: " + result;
+        }
+    </script>
+</body>
+</html>
